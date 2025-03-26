@@ -19,4 +19,14 @@
     <servlet-name>GetAllDate</servlet-name>
     <url-pattern>/GetAllDate</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>SetScenario</display-name>
+    <servlet-name>SetScenario</servlet-name>
+    <servlet-class>ikura.servlet.SetScenario</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>SetScenario</servlet-name>
+    <url-pattern>/SetScenario</url-pattern>
+  </servlet-mapping>
 </web-app>

@@ -27,13 +27,26 @@ public class ScreenDao {
                  ResultSet rs = stmt.executeQuery()) {
 
                 while (rs.next()) {
-                    screens.add(new ScreenDto(
-                            rs.getInt("screen_id"),
-                            rs.getInt("screen_type"),
-                            rs.getString("character_file_name"),
-                            rs.getString("back_file_name"),
-                            rs.getInt("next_screen_id")
-                    ));
+                    ScreenDto dto = new ScreenDto();
+                    dto.setScreen_id(rs.getInt("screen_id"));
+                    dto.setScreen_type(rs.getInt("screen_type"));
+                    dto.setCharacter_name(rs.getString("character_name"));
+                    dto.setCharacter_file_name(rs.getString("character_file_name"));
+                    dto.setBack_file_name(rs.getString("back_file_name"));
+                    dto.setCharacter_scene_type(rs.getInt("character_scene_type"));
+                    dto.setCharacter_exit_type(rs.getInt("character_exit_type"));
+                    dto.setCharacter_size(rs.getInt("character_size"));
+                    dto.setCharacter_position(rs.getInt("character_position"));
+                    dto.setBgm_file_name(rs.getString("bgm_file_name"));
+
+                    int nextScreenId = rs.getInt("next_screen_id");
+                    if (rs.wasNull()) {
+                        dto.setNext_screen_id(null);
+                    } else {
+                        dto.setNext_screen_id(nextScreenId);
+                    }
+
+                    screens.add(dto);
                 }
             }
         } catch (ClassNotFoundException e) {

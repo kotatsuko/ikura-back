@@ -29,12 +29,14 @@ public class LineDao {
                  ResultSet rs = stmt.executeQuery()) {
 
                 while (rs.next()) {
-                    lines.add(new LineDto(
-                            rs.getInt("line_id"),
-                            rs.getInt("screen_id"),
-                            rs.getString("line"),
-                            rs.getInt("line_size")
-                    ));
+                	LineDto dto = new LineDto();
+                    dto.setLine_id(rs.getInt("line_id"));
+                    dto.setScreen_id(rs.getInt("screen_id"));
+                    dto.setLine(rs.getString("line"));
+                    dto.setLine_size(rs.getInt("line_size"));
+                    dto.setLine_type(rs.getInt("line_type"));
+
+                    lines.add(dto);
                 }
             }
         } catch (ClassNotFoundException e) {

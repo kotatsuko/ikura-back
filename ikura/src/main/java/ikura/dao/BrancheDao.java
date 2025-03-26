@@ -29,12 +29,12 @@ public class BrancheDao {
                  ResultSet rs = stmt.executeQuery()) {
 
                 while (rs.next()) {
-                    branches.add(new BrancheDto(
-                            rs.getInt("branch_id"),
-                            rs.getInt("screen_id"),
-                            rs.getString("button_label"),
-                            rs.getInt("next_screen_id")
-                    ));
+                	BrancheDto dto = new BrancheDto();
+                	dto.setBranch_id(rs.getInt("branch_id"));
+                	dto.setScreen_id(rs.getInt("screen_id"));
+                	dto.setButton_label(rs.getString("button_label"));
+                	dto.setNext_screen_id(rs.getInt("next_screen_id"));
+                    branches.add(dto);
                 }
             }
         } catch (ClassNotFoundException e) {
