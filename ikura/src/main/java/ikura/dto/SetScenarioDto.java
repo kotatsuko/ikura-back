@@ -3,15 +3,15 @@ package ikura.dto;
 import java.util.List;
 
 public class SetScenarioDto {
-    private List<ScreenDto> screen;
+    private List<ScreenDto> screens;
     private List<BrancheDto> branches;
     private List<LineDto> lines;
 
 	public List<ScreenDto>  getScreen() {
-		return screen;
+		return screens;
 	}
-	public void setScreen(List<ScreenDto>  screen) {
-		this.screen = screen;
+	public void setScreen(List<ScreenDto>  screens) {
+		this.screens = screens;
 	}
 	public List<BrancheDto> getBranches() {
 		return branches;

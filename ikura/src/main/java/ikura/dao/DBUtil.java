@@ -5,7 +5,7 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBUtil {
-    private static final String DB_PATH = "C:/pleiades-e4.5-java-jre_20160312/pleiades/workspace/ikura/src/main/webapp/db/ikura.db";
+    private static final String DB_PATH = "C:/Users/koyuk/study/gitHub/ikura-back/ikura/src/main/webapp/db/ikura.db";
     private static final String DB_URL = "jdbc:sqlite:" + DB_PATH;
     static {
         try {
