@@ -8,32 +8,30 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ikura.common.CommonEnums.Database;
 import ikura.dto.BrancheDto;
 
 public class BrancheDao {
-    // 🔹 Java 8 で正しい JDBC URL（絶対パス推奨）
-    private static final String DB_PATH = "C:/pleiades-e4.5-java-jre_20160312/pleiades/workspace/ikura/src/main/webapp/db/ikura.db";
-    private static final String DB_URL = "jdbc:sqlite:" + DB_PATH;
 
     public List<BrancheDto> getAllBranches() {
         List<BrancheDto> branches = new ArrayList<>();
-        String sql = "SELECT branch_id, screen_id, button_label, next_screen_id FROM branche";
+        String sql = "SELECT * FROM branche";
 
         try {
             // 🔹 Java 8 対応: JDBC ドライバの明示的なロード
             Class.forName("org.sqlite.JDBC");
 
             // 🔹 データベース接続
-            try (Connection conn = DriverManager.getConnection(DB_URL);
+            try (Connection conn = DriverManager.getConnection(Database.URL.getValue());
                  PreparedStatement stmt = conn.prepareStatement(sql);
                  ResultSet rs = stmt.executeQuery()) {
 
                 while (rs.next()) {
                 	BrancheDto dto = new BrancheDto();
-                	dto.setBranch_id(rs.getInt("branch_id"));
-                	dto.setScreen_id(rs.getInt("screen_id"));
+                	dto.setBranch_id(rs.getString("branch_id"));
+                	dto.setScreen_id(rs.getString("screen_id"));
                 	dto.setButton_label(rs.getString("button_label"));
-                	dto.setNext_screen_id(rs.getInt("next_screen_id"));
+                	dto.setNext_screen_id(rs.getString("next_screen_id"));
                     branches.add(dto);
                 }
             }

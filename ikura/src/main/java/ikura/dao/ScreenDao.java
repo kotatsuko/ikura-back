@@ -8,43 +8,40 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+import ikura.common.CommonEnums.Database;
 import ikura.dto.ScreenDto;
 
 public class ScreenDao {
-    private static final String DB_URL = "jdbc:sqlite:C:/pleiades-e4.5-java-jre_20160312/pleiades/workspace/ikura/src/main/webapp/db/ikura.db";
 
     public List<ScreenDto> getAllScreens() {
         List<ScreenDto> screens = new ArrayList<>();
-        String sql = "SELECT screen_id, screen_type, character_file_name, back_file_name, next_screen_id FROM screen";
+        String sql = "SELECT *FROM screen";
 
         try {
             // 🔹 JDBC ドライバを明示的にロード（Java 8 対策）
             Class.forName("org.sqlite.JDBC");
 
             // 🔹 データベース接続
-            try (Connection conn = DriverManager.getConnection(DB_URL);
+            try (Connection conn = DriverManager.getConnection(Database.URL.getValue());
                  PreparedStatement stmt = conn.prepareStatement(sql);
                  ResultSet rs = stmt.executeQuery()) {
 
                 while (rs.next()) {
                     ScreenDto dto = new ScreenDto();
-                    dto.setScreen_id(rs.getInt("screen_id"));
-                    dto.setScreen_type(rs.getInt("screen_type"));
+                    dto.setScreen_id(rs.getString("screen_id"));
+                    dto.setScreen_type(rs.getString("screen_type"));
                     dto.setCharacter_name(rs.getString("character_name"));
                     dto.setCharacter_file_name(rs.getString("character_file_name"));
                     dto.setBack_file_name(rs.getString("back_file_name"));
-                    dto.setCharacter_scene_type(rs.getInt("character_scene_type"));
-                    dto.setCharacter_exit_type(rs.getInt("character_exit_type"));
-                    dto.setCharacter_size(rs.getInt("character_size"));
-                    dto.setCharacter_position(rs.getInt("character_position"));
+                    dto.setCharacter_scene_type(rs.getString("character_scene_type"));
+                    dto.setCharacter_exit_type(rs.getString("character_exit_type"));
+                    dto.setCharacter_size(rs.getString("character_size"));
+                    dto.setCharacter_position(rs.getString("character_position"));
                     dto.setBgm_file_name(rs.getString("bgm_file_name"));
-
-                    int nextScreenId = rs.getInt("next_screen_id");
-                    if (rs.wasNull()) {
-                        dto.setNext_screen_id(null);
-                    } else {
-                        dto.setNext_screen_id(nextScreenId);
-                    }
+                    dto.setParent_screen_id(rs.getString("parent_screen_id"));
+                    dto.setFrom_branch_id(rs.getString("from_branch_id"));
+                    dto.setDepth(rs.getString("depth"));
+                    dto.setNext_screen_id(rs.getString("next_screen_id"));
 
                     screens.add(dto);
                 }

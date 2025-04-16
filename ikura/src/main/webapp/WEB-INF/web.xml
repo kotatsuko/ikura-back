@@ -29,4 +29,14 @@
     <servlet-name>SetScenario</servlet-name>
     <url-pattern>/SetScenario</url-pattern>
   </servlet-mapping>
+  <servlet>
+    <description></description>
+    <display-name>ImageListServlet</display-name>
+    <servlet-name>ImageListServlet</servlet-name>
+    <servlet-class>ikura.servlet.ImageListServlet</servlet-class>
+  </servlet>
+  <servlet-mapping>
+    <servlet-name>ImageListServlet</servlet-name>
+    <url-pattern>/ImageListServlet</url-pattern>
+  </servlet-mapping>
 </web-app>

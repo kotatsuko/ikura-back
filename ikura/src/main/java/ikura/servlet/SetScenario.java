@@ -36,7 +36,7 @@ public class SetScenario extends HttpServlet {
         String name = part.getName();
         if (name.startsWith("character_file_") || name.startsWith("back_file_")) {
           String fileName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-          part.write("C:/Users/koyuk/study/screen/" + fileName);
+          part.write("C:/Users/koyuk/study/gitHub/ikura-back/ikura/src/main/webapp/images/" + fileName);
         }
       }
 
@@ -46,9 +46,7 @@ public class SetScenario extends HttpServlet {
       SetScenarioDto data = gson.fromJson(new java.io.InputStreamReader(jsonPart.getInputStream(), "UTF-8"), SetScenarioDto.class);
 
       GameDao dao = new GameDao();
-      dao.insertScreen(data.getScreen());
-      dao.insertBrancheList(data.getBranches());
-      dao.insertLineList(data.getLines());
+      dao.allInsert(data);
 
       response.getWriter().write("{\"status\":\"ok\"}");
     } catch (Exception e) {
